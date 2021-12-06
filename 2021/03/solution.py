@@ -2,8 +2,6 @@ from collections import Counter
 with open("input.txt") as f:
     lines = [int(line.strip(), 2) for line in f]
 
-lines.sort()
-
 def score(nums, bit_pos):
     res = 0
     for num in nums:
@@ -50,41 +48,5 @@ while len(co2_rating) > 1:
 
 temp = o2_rating.pop()
 print(temp * co2_rating.pop())
-
-
-lo, hi = 0, len(lines)
-bp = 11
-while lo < hi:
-    mid = (lo + hi) // 2
-
-    most_common = (lines[mid] >> bp & 1)
-
-    if most_common:
-        # search between lo and mid for first 0
-
-        while lo < mid:
-            mid2 = (lo + mid) // 2
-            if lines[mid2] >> bp & 1:
-                mid = mid2
-            else:
-                lo = mid2 + 1
-
-        hi = mid
-    else:
-        # search between mid and hi for first 1
-
-        while mid < hi:
-            mid2 = (mid + hi) // 2
-            if lines[mid2] >> bp & 1:
-                hi = mid2
-            else:
-                mid = mid2 + 1
-        lo = mid + 1
-
-print(temp, lines[lo])
-
-
-
-
 
 
